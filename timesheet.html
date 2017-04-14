@@ -1,0 +1,171 @@
+<html>
+
+<head>
+	<title>Jira Timesheet Integration</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<style>
+		thead {
+			background-color: "#229cd0";
+		}
+
+		.box2 {
+			display: none;
+		}
+
+		.box4 {
+			display: none;
+		}
+
+		.hide {
+			display: none;
+		}
+
+		.padding {
+			padding: 10px;
+		}
+	</style>
+</head>
+<script>
+	var dateField = document.getElementById("inlineFormInput2");
+	var fakeDateField = document.getElementById("fakeDateField");
+
+	fakeDateField.addEventListener("click", function() {
+		document.getElementById("inlineFormInput2").focus();
+	}, false);
+
+	dateField.addEventListener("focus", function() {
+		fakeDateField.style.opacity = 0;
+		dateField.style.opacity = 1;
+	});
+
+	dateField.addEventListener("blur", function() {
+		fakeDateField.style.opacity = 1;
+		dateField.style.opacity = 0;
+	});
+
+	dateField.addEventListener("change", function() {
+		// this method could be replaced by momentJS stuff
+		if (dateField.value.length < 1) {
+			return;
+		}
+
+		var date = new Date(inlineFormInput2.value);
+		var day = date.getUTCDate();
+		var month = date.getUTCMonth() + 1; //zero-based month values
+		fakeDateField.innerHTML = (month < 10 ? "0" : "") + month + " / " + day;
+	});
+</script>
+<script>
+	var dateField = document.getElementById("inlineFormInput3");
+	var fakeDateField = document.getElementById("fakeDateField");
+
+	fakeDateField.addEventListener("click", function() {
+		document.getElementById("inlineFormInput2").focus();
+	}, false);
+
+	dateField.addEventListener("focus", function() {
+		fakeDateField.style.opacity = 0;
+		dateField.style.opacity = 1;
+	});
+
+	dateField.addEventListener("blur", function() {
+		fakeDateField.style.opacity = 1;
+		dateField.style.opacity = 0;
+	});
+
+	dateField.addEventListener("change", function() {
+		// this method could be replaced by momentJS stuff
+		if (dateField.value.length < 1) {
+			return;
+		}
+
+		var date = new Date(inlineFormInput2.value);
+		var day = date.getUTCDate();
+		var month = date.getUTCMonth() + 1; //zero-based month values
+		fakeDateField.innerHTML = (month < 10 ? "0" : "") + month + " / " + day;
+	});
+</script>
+
+<body>
+
+	<div class="container">
+		<div class="panel panel-primary padding">
+			<div class="panel-heading">
+				<h2 class="text-center">Jira Timesheet Integration</h2>
+			</div>
+			<form class="form-group" action="index.php" method="post">
+				<!--Jira username and password-->
+				<label class="mr-sm-2" for="inlineFormInput">Jira Username</label>
+				<input type="text" name="user" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" disabled/>
+				<label class="mr-sm-2" for="inlineFormInput">Jira Password</label>
+				<input type="password" name="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput2" disabled/>
+				<!--end of jira username and password-->
+				<label class="mr-sm-2" for="inlineFormInput">Project (use short code)</label>
+				<input type="text" name="projectCode" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="FRONT" />
+             <label class="mr-sm-2" for="inlineFormInput">From Date</label>
+                <input type="date" name="fromDate" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput2"  pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="YYYY-MM-DD"/>
+
+								<label class="mr-sm-2" for="inlineFormInput">To Date</label>
+                <input type="date" name="toDate" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput3" placeholder="YYYY-MM-DD"  pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
+				
+                <label class="mr-sm-2" for="inlineFormInput">Employee</label>
+				<input type="text" name="assignee" class=" box2 form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput3" placeholder="Manuel Re" />
+
+
+				<label class=" hide mr-sm-2" for="inlineFormCustomSelect">Select</label>
+				<select class=" box1 form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+										<option selected>Choose...</option>
+										<option value="Manuel Re">Manuel Re</option>
+										<option value="John Testa">John Testa</option>
+										<option value="John Kean">John Kean</option>
+                                      <option value="Vernice Phoa">Vernice Phoa</option>
+                                      <option value="Kinga Pilarek">Kinga Pilarek</option>
+                                      <option value="Nandana Guda">Nandana Guda</option>
+                                      <option value="Anthony Lateef">Anthony Lateef</option>
+                                      <option value="Charles Wei">Charles Wei</option>
+                                      <option value="John Testa">Katrina Walter</option>
+                                      <option value="Leonie Meyer">Leonie Meyer</option>
+                                      <option value="Ami Javvaji">Ami Javvaji</option>
+
+
+  								  </select>
+				<script>
+					$(".box1").change(function() {
+						$(".box2").val($(this).val());
+					});
+				</script>
+				<br>
+				<!--Type of report-->
+				<label class="mr-sm-2" for="inlineFormInput">Report Type</label>
+				<input type="text" name="invoice" class=" box4 form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput3" placeholder="Manuel Re" />
+
+
+				<label class=" hide mr-sm-2" for="inlineFormCustomSelect">Select</label>
+				<select class=" box3 form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+	                                      <option value="Timesheet" selected>Timesheet</option>
+	                                      <option value="Invoice">Invoice</option>
+
+	  								  </select>
+				<script>
+					$(".box3").change(function() {
+						$(".box4").val($(this).val());
+					});
+				</script>
+				<br>
+				<button class="btn btn-primary" type="submit" name="formSubmit" value="Generate">Create Report</button>
+				<a class="btn btn-success" href="timesheet.txt" download>Download Report</a>
+				<button class="btn btn-danger" type="submit" name="formSubmit" value="Generate">Clear Filter</button>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>
